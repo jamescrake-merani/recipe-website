@@ -1,5 +1,6 @@
 (ns recipe-website.model
-  (:require [honey.sql :as sql]))
+  (:require [honey.sql :as sql]
+            [next.jdbc :as jdbc]))
 
 (def recipe-table
   (sql/format
@@ -23,3 +24,8 @@
                    [:order :int]
                    [:content :text]
                    [[:primary-key [:recipe-id :order]]]]}))
+
+(defn create-tables [db]
+  (jdbc/execute-one! db recipe-table)
+  (jdbc/execute-one! db tag)
+  (jdbc/execute-one! db recipe-line))
