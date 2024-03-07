@@ -26,6 +26,5 @@
                    [[:primary-key :recipe-id :order]]]}))
 
 (defn create-tables [db]
-  (jdbc/execute-one! db recipe-table)
-  (jdbc/execute-one! db tag)
-  (jdbc/execute-one! db recipe-line))
+  (map #(jdbc/execute-one! db %)
+       [recipe-table tag recipe-line]))
