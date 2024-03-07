@@ -13,19 +13,17 @@
 (def tag
   (sql/format
    {:create-table :tag
-    :with-columns [[:recipe-id :int ]
+    :with-columns [[:recipe-id :int :references [:recipe :id]]
                    [:name :text]
-                   [[:primary-key :recipe-id :name]
-                    [:foreign-key [:references :recipe :id]]]]}))
+                   [[:primary-key :recipe-id :name]]]}))
 
 (def recipe-line
   (sql/format
    {:create-table :recipe-line
-    :with-columns [[:recipe-id :int ]
-                   [:order :int]
+    :with-columns [[:recipe-id :int :references [:recipe :id]]
+                   [:line-order :int]
                    [:content :text]
-                   [[:primary-key :recipe-id :order]
-                    [:foreign-key [:references :recipe :id]]]]}))
+                   [[:primary-key :recipe-id :order]]]}))
 
 (defn create-tables [db]
   (jdbc/execute-one! db recipe-table)
