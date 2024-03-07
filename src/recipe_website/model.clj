@@ -5,7 +5,7 @@
 (def recipe-table
   (sql/format
    {:create-table :recipe
-    :with-columns [[:id :primary-key :auto-increment]
+    :with-columns [[:id :primary-key]
                    [:name :text]
                    [:time-guidance :int]
                    [:published :boolean]]}))
