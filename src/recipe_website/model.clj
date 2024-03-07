@@ -15,7 +15,7 @@
    {:create-table :tag
     :with-columns [[:recipe-id :int ]
                    [:name :text]
-                   [[:primary-key [:recipe-id :name]]
+                   [[:primary-key :recipe-id :name]
                     [:foreign-key [:references :recipe :id]]]]}))
 
 (def recipe-line
@@ -24,7 +24,7 @@
     :with-columns [[:recipe-id :int ]
                    [:order :int]
                    [:content :text]
-                   [[:primary-key [:recipe-id :order]]
+                   [[:primary-key :recipe-id :order]
                     [:foreign-key [:references :recipe :id]]]]}))
 
 (defn create-tables [db]
