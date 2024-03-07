@@ -15,3 +15,11 @@
     :with-columns [[:recipe-id :int :foreign-key [:references :recipe :id]]
                    [:name :text]
                    [[:primary-key [:recipe-id :name]]]]}))
+
+(def recipe-line
+  (sql/format
+   {:create-table :recipe-line
+    :with-columns [[:recipe-id :int :foreign-key [:references :recipe :id]]
+                   [:order :int]
+                   [:content :text]
+                   [[:primary-key [:recipe-id :order]]]]}))
