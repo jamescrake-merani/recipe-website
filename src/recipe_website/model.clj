@@ -23,7 +23,8 @@
     :with-columns [[:recipe-id :int :references [:recipe :id]]
                    [:line-order :int]
                    [:content :text]
-                   [[:primary-key :recipe-id :order]]]}))
+                   [[:primary-key :recipe-id :line-order]]]}))
+
 
 (defn create-tables [db]
   (map #(jdbc/execute-one! db %)
