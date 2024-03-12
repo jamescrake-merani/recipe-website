@@ -2,6 +2,9 @@
   (:require [honey.sql :as sql]
             [next.jdbc :as jdbc]))
 
+(comment
+  (define test-data-source (jdbc/get-datasource {:dbtype "sqlite" "test.db"})))
+
 (def recipe-table
   (sql/format
    {:create-table [:recipe :if-not-exits]
