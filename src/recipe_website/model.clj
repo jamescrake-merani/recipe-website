@@ -47,8 +47,8 @@
   (jdbc/execute-one!
    (sql/format
     {:insert-into :recipe
-     :columns [:name [:name :time-guidance :published]]
-     :values [(:name recipe) (:time-guidance recipe) (:published recipe)]})
+     :columns [:name :time-guidance :published]
+     :values [[(:name recipe) (:time-guidance recipe) (:published recipe)]]})
    {:return-keys true}))
 
 (defn create-tables [db]
