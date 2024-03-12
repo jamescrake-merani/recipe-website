@@ -28,6 +28,11 @@
                    [:content :text]
                    [[:primary-key :recipe-id :line-order]]]}))
 
+;; TODO: Need to retrive recipe lines as well.
+(defn get-recipe [recipe-id]
+  (jdbc/execute-one!
+   (sql/format
+    {:select :* :from :recipe :where [:= :id recipe-id]})))
 
 (defn create-tables [db]
   (map #(jdbc/execute-one! db %)
