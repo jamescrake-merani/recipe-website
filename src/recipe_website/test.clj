@@ -15,4 +15,4 @@
 
 (defn populate-database [db]
   (model/create-tables db)
-  (model/insert-recipe db test-recipe))
+  (model/insert-recipe test-recipe db ))
