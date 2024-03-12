@@ -4,7 +4,7 @@
 
 (def recipe-table
   (sql/format
-   {:create-table :recipe
+   {:create-table [:recipe :if-not-exits]
     :with-columns [[:id :primary-key]
                    [:name :text]
                    [:time-guidance :int]
@@ -12,14 +12,14 @@
 
 (def tag
   (sql/format
-   {:create-table :tag
+   {:create-table [:tag :if-not-exists]
     :with-columns [[:recipe-id :int :references [:recipe :id]]
                    [:name :text]
                    [[:primary-key :recipe-id :name]]]}))
 
 (def recipe-line
   (sql/format
-   {:create-table :recipe-line
+   {:create-table [:recipe-line :if-not-exits]
     :with-columns [[:recipe-id :int :references [:recipe :id]]
                    [:line-order :int]
                    [:content :text]
