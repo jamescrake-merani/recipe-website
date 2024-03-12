@@ -3,7 +3,7 @@
             [next.jdbc :as jdbc]))
 
 (comment
-  (def test-data-source (jdbc/get-datasource {:dbtype "sqlite" :dbname "memory"})))
+  (def test-data-source  (jdbc/get-datasource {:dbtype "sqlite" :dbname "test_db.db"})))
 
 (def recipe-table
   (sql/format
@@ -53,5 +53,5 @@
    {:return-keys true}))
 
 (defn create-tables [db]
-  (map #(jdbc/execute-one! db %)
-       [recipe-table tag recipe-line]))
+  (doseq [table [recipe-table tag recipe-line]]
+    (jdbc/execute-one! db table)))
