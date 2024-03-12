@@ -35,7 +35,7 @@
     {:select :* :from :recipe :where [:= :id recipe-id]})))
 
 ;; TODO Insert the lines as well.
-(defn insert-recipe [recipe]
+(defn insert-recipe [recipe db]
   "RECIPE is represented as a map with the following keys
 :name
 :time-guidance
@@ -45,6 +45,7 @@
 :conten
 "
   (jdbc/execute-one!
+   db
    (sql/format
     {:insert-into :recipe
      :columns [:name :time-guidance :published]
