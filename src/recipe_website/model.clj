@@ -3,7 +3,7 @@
             [next.jdbc :as jdbc]))
 
 (comment
-  (def test-data-source (jdbc/get-datasource {:dbtype "sqlite" "test.db"})))
+  (def test-data-source (jdbc/get-datasource {:dbtype "sqlite" :dbname "test.db"})))
 
 (def recipe-table
   (sql/format
