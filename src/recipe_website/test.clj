@@ -13,4 +13,6 @@
            "Crumble the baked limestone chunks"]})
 
 
-(defn populate-database)
+(defn populate-database [db]
+  (model/create-tables db)
+  (model/insert-recipe test-recipe))
