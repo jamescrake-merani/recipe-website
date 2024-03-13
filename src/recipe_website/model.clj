@@ -1,6 +1,7 @@
 (ns recipe-website.model
   (:require [honey.sql :as sql]
-            [next.jdbc :as jdbc]))
+            [next.jdbc :as jdbc]
+            [next.jdbc.sql :as jsql]))
 
 (comment
   (def test-data-source  (jdbc/get-datasource {:dbtype "sqlite" :dbname ":memory:"})))
@@ -44,13 +45,19 @@
 
 :conten
 "
-  (jdbc/execute-one!
-   db
-   (sql/format
-    {:insert-into :recipe
-     :columns [:name :time-guidance :published]
-     :values [[(:name recipe) (:time-guidance recipe) (:published recipe)]]})
-   {:return-keys true}))
+  (let [recipe-id
+        (jdbc/execute-one!
+         db
+         (sql/format
+          {:insert-into :recipe
+           :columns [:name :time-guidance :published]
+           :values [[(:name recipe) (:time-guidance recipe) (:published recipe)]]})
+         {:return-keys true})]
+    (jsql/insert-multi!
+     db :recipe-line
+     [:recipe-id :line-order :content]
+     (map (fn [order content]
+            [recipe-id order content])))))
 
 (defn create-tables [db]
   (doseq [table [recipe-table tag recipe-line]]
