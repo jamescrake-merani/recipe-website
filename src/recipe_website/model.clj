@@ -46,13 +46,14 @@
 :conten
 "
   (let [recipe-id
-        (jdbc/execute-one!
-         db
-         (sql/format
-          {:insert-into :recipe
-           :columns [:name :time-guidance :published]
-           :values [[(:name recipe) (:time-guidance recipe) (:published recipe)]]})
-         {:return-keys true})]
+        (-> (jdbc/execute-one!
+             db
+             (sql/format
+              {:insert-into :recipe
+               :columns [:name :time-guidance :published]
+               :values [[(:name recipe) (:time-guidance recipe) (:published recipe)]]})
+             {:return-keys true})
+            (:last_insert_rowid()))]
     (jsql/insert-multi!
      db :recipe-line
      [:recipe-id :line-order :content]
