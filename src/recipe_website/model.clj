@@ -59,9 +59,9 @@
      db
      (sql/format
       {:insert-into :recipe-line
-       :columns [:line-order :content]
+       :columns [:recipe-id :line-order :content]
        :values (map (fn [line order]
-                      [order line])
+                      [recipe-id order line])
                     lines (range (count lines)))}))))
 
 (defn create-tables [db]
