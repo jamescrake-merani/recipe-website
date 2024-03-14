@@ -53,12 +53,16 @@
                :columns [:name :time-guidance :published]
                :values [[(:name recipe) (:time-guidance recipe) (:published recipe)]]})
              {:return-keys true})
-            (:last_insert_rowid()))]
-    (jsql/insert-multi!
-     db :recipe-line
-     [:recipe-id :line-order :content]
-     (map (fn [order content]
-            [recipe-id order content])))))
+            (:last_insert_rowid()))
+        lines (:lines recipe)]
+    (jdbc/execute-one!
+     db
+     (sql/format
+      {:insert-into :recipe-line
+       :columns [:line-order :content]
+       :values (map (fn [line order]
+                      [order line])
+                    lines (range (count lines)))}))))
 
 (defn create-tables [db]
   (doseq [table [recipe-table tag recipe-line]]
