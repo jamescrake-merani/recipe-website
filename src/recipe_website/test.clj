@@ -13,7 +13,7 @@
            "Crumble the baked limestone chunks"]})
 
 (defn create-and-populate-database []
-  (let [new-db (jdbc/get-datasource {:dbtype "sqlite" :dbname ":memory:"})]
+  (let [new-db (jdbc/get-connection {:dbtype "sqlite" :dbname ":memory:"})]
     (populate-database new-db)
     new-db))
 
