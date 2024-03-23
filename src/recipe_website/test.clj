@@ -1,6 +1,6 @@
 (ns recipe-website.test
-  (:require  [recipe-website.model :as model]))
-
+  (:require  [recipe-website.model :as model]
+             [next.jdbc :as jdbc]))
 
 (def test-recipe
   {:name "Cement"
@@ -12,6 +12,10 @@
            "Let he baked limestone cool"
            "Crumble the baked limestone chunks"]})
 
+(defn create-and-populate-database []
+  (let [new-db (jdbc/get-datasource {:dbtype "sqlite" :dbname ":memory:"})]
+    (populate-database new-db)
+    new-db))
 
 (defn populate-database [db]
   (model/create-tables db)

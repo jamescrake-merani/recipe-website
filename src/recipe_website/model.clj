@@ -3,9 +3,6 @@
             [next.jdbc :as jdbc]
             [next.jdbc.sql :as jsql]))
 
-(comment
-  (def test-data-source  (jdbc/get-datasource {:dbtype "sqlite" :dbname ":memory:"})))
-
 (def recipe-table
   (sql/format
    {:create-table [:recipe :if-not-exists]
