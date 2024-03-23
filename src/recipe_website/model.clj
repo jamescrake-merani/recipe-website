@@ -28,10 +28,15 @@
 
 ;; TODO: Need to retrive recipe lines as well.
 (defn get-recipe [db recipe-id]
-  (jdbc/execute-one!
-   db
-   (sql/format
-    {:select :* :from :recipe :where [:= :id recipe-id]})))
+  (into
+   {:lines (jdbc/execute!
+            db
+            (sql/format
+             {:select :* :from :recipe-line :where [:= :recipe-id recipe-id]}))}
+   (jdbc/execute-one!
+    db
+    (sql/format
+     {:select :* :from :recipe :where [:= :id recipe-id]}))))
 
 (defn insert-recipe [recipe db]
   "RECIPE is represented as a map with the following keys
