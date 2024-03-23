@@ -6,7 +6,7 @@
 (def recipe-table
   (sql/format
    {:create-table [:recipe :if-not-exists]
-    :with-columns [[:id :primary-key]
+    :with-columns [[:id :integer :primary-key]
                    [:name :text]
                    [:time-guidance :int]
                    [:published :boolean]]}))
