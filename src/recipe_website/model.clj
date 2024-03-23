@@ -35,7 +35,6 @@
    (sql/format
     {:select :* :from :recipe :where [:= :id recipe-id]})))
 
-;; TODO Insert the lines as well.
 (defn insert-recipe [recipe db]
   "RECIPE is represented as a map with the following keys
 :name
