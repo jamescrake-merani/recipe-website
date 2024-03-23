@@ -49,7 +49,8 @@
                :columns [:name :time-guidance :published]
                :values [[(:name recipe) (:time-guidance recipe) (:published recipe)]]})
              {:return-keys true})
-            (:last_insert_rowid()))
+            (vals)
+            (first))
         lines (:lines recipe)]
     (jdbc/execute-one!
      db
