@@ -27,8 +27,9 @@
                    [[:primary-key :recipe-id :line-order]]]}))
 
 ;; TODO: Need to retrive recipe lines as well.
-(defn get-recipe [recipe-id]
+(defn get-recipe [db recipe-id]
   (jdbc/execute-one!
+   db
    (sql/format
     {:select :* :from :recipe :where [:= :id recipe-id]})))
 
