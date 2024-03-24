@@ -15,7 +15,7 @@
    ::db-connection {:db-file "data.db"}})
 
 (defmethod ig/init-key ::db-connection [_ {:keys [db-file]}]
-  (jdbc/get-datasource {:dbtype "sqlite" :dbname db-file}))
+  (jdbc/get-connection {:dbtype "sqlite" :dbname db-file}))
 
 (defmethod ig/init-key ::http-server [_ {:keys [port]}]
   (jetty/run-jetty (defaults/wrap-defaults #'handler defaults/site-defaults)
