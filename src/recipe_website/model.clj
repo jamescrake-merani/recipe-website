@@ -61,6 +61,7 @@
 :conten
 "
   (let [recipe-id
+        ;; Insert the recipe itself
         (-> (jdbc/execute-one!
              db
              (sql/format
@@ -71,6 +72,7 @@
             (vals)
             (first))
         lines (:lines recipe)]
+    ;; Insert the recipe lines.
     (jdbc/execute-one!
      db
      (sql/format
