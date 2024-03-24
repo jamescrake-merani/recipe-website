@@ -57,6 +57,12 @@
 :time-guidance
 :published
 :lines (vector of line strings assumed to be in order).
+
+:ingredients (vector of maps assumed to be in order with the following)
+
+:name
+:quantity (number)
+:measurement (str)
 "
   (let [recipe-id
         ;; Insert the recipe itself
@@ -69,7 +75,10 @@
              {:return-keys true})
             (vals)
             (first))
-        lines (:lines recipe)]
+        lines (:lines recipe)
+        ingredients (:ingredients recipe)
+        lines-range (range (count lines))
+        ingredients-range (range (count ingredients))]
     ;; Insert the recipe lines.
     (jdbc/execute-one!
      db
@@ -78,7 +87,20 @@
        :columns [:recipe-id :line-order :content]
        :values (map (fn [line order]
                       [recipe-id order line])
-                    lines (range (count lines)))}))))
+                    lines lines-range)}))
+    ;;Finally, insert the ingredients
+    (jdbc/execute-one!
+     db
+     (sql/format
+      {:insert-into :ingredient
+       :columns [:recipe-id :ingredient-order :ingredient-name :quantity :measurement]
+       :values (map (fn [order ingredient]
+                      [recipe-id
+                       order
+                       (:name ingredient)
+                       (:quantity ingredient)
+                       (:measurement measurement)])
+                    ingredients ingredients-range)}))))
 
 (defn create-tables [db]
   (doseq [table [recipe-table tag recipe-line]]
