@@ -26,6 +26,19 @@
                    [:content :text]
                    [[:primary-key :recipe-id :line-order]]]}))
 
+;; I don't really know if ordering of the ingredients on a recipe is a detail
+;; we're bothered about but I think at least give the user the freedom to
+;; control it if it really does matter to them.
+
+(def ingredient
+  (sql/format
+   {:create-table [:ingredient :if-not-exists]
+    :with-columns [[:recipe-id :int :references [:recipe :id]]
+                   [:ingredient-order :int]
+                   [:ingredient-name :text]
+                   [:quantity :real]
+                   [:measurement :text]]}))
+
 (defn get-recipe [db recipe-id]
   (into
    {:lines (jdbc/execute!
