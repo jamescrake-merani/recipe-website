@@ -104,7 +104,7 @@
                        (:name ingredient)
                        (:quantity ingredient)
                        (:measurement ingredient)])
-                    ingredients ingredients-range)}))))
+                    ingredients-range ingredients)}))))
 
 (defn create-tables [db]
   (doseq [table [recipe-table tag recipe-line ingredient]]
