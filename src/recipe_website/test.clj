@@ -10,7 +10,10 @@
            "Break the limestone into small pieces"
            "Cook the limestone in a kiln or outdoor even"
            "Let he baked limestone cool"
-           "Crumble the baked limestone chunks"]})
+           "Crumble the baked limestone chunks"]
+   :ingredients [{:name "Limestone" :quantity 100 :measurement "grams"}
+                 {:name "Something Else" :quantity 323 :measurement "tests"}
+                 {:name "Sanity" :quantity 1 :measurement "idk anymores"}]})
 
 (defn create-and-populate-database []
   (let [new-db (jdbc/get-connection {:dbtype "sqlite" :dbname ":memory:"})]
