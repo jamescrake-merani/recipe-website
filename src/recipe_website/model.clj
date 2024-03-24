@@ -26,7 +26,6 @@
                    [:content :text]
                    [[:primary-key :recipe-id :line-order]]]}))
 
-;; TODO: Need to retrive recipe lines as well.
 (defn get-recipe [db recipe-id]
   (into
    {:lines (jdbc/execute!
