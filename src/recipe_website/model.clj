@@ -103,7 +103,7 @@
                        order
                        (:name ingredient)
                        (:quantity ingredient)
-                       (:measurement measurement)])
+                       (:measurement ingredient)])
                     ingredients ingredients-range)}))))
 
 (defn create-tables [db]
