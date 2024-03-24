@@ -13,3 +13,13 @@
         [:h1 "Test Template"]
         [:div.container
          current-page]]]))
+
+(defn recipe-page [recipe]
+  (template
+   (h/html
+       [:div
+        [:h1 (:recipe/name recipe)]
+        [:hr]
+        [:ol
+         (doall (map (fn [line]
+                       [:li (:recipe_line/content line)])))]])))
