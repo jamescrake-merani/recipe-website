@@ -107,5 +107,5 @@
                     ingredients ingredients-range)}))))
 
 (defn create-tables [db]
-  (doseq [table [recipe-table tag recipe-line]]
+  (doseq [table [recipe-table tag recipe-line ingredient]]
     (jdbc/execute-one! db table)))
