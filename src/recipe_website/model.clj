@@ -56,9 +56,7 @@
 :name
 :time-guidance
 :published
-:lines (vector of lines assumed to be in order) as follows:
-
-:conten
+:lines (vector of line strings assumed to be in order).
 "
   (let [recipe-id
         ;; Insert the recipe itself
