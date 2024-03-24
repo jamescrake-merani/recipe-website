@@ -1,4 +1,4 @@
-(ns recipe-website.layout
+(ns recipe-website.views
   (:require [hiccup2.core :as h]))
 
 (defn template [current-page]
