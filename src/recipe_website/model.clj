@@ -37,7 +37,8 @@
                    [:ingredient-order :int]
                    [:ingredient-name :text]
                    [:quantity :real]
-                   [:measurement :text]]}))
+                   [:measurement :text]
+                   [[:primary-key :recipe-id :ingredient-order]]]}))
 
 (defn get-recipe [db recipe-id]
   (into
