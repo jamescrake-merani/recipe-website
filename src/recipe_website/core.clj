@@ -2,12 +2,8 @@
   (:require [integrant.core :as ig]
             [next.jdbc :as jdbc]
             [ring.adapter.jetty :as jetty]
-            [ring.middleware.defaults :as defaults]))
-
-(defn handler [req]
-  {:status 200
-   :headers {"Content-Type" "text/html"}
-   :body "<h1>Test Output</h1>"})
+            [ring.middleware.defaults :as defaults]
+            [recipe-website.controller :as controller]))
 
 (def config
   {::http-server {:port 8080
@@ -18,7 +14,7 @@
   (jdbc/get-connection {:dbtype "sqlite" :dbname db-file}))
 
 (defmethod ig/init-key ::http-server [_ {:keys [port db]}]
-  (jetty/run-jetty (defaults/wrap-defaults #(handler db %) defaults/site-defaults)
+  (jetty/run-jetty (defaults/wrap-defaults #(controller/handler db %) defaults/site-defaults)
                    {:join? false
                     :port port}))
 
