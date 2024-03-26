@@ -14,6 +14,8 @@
         [:div.container
          current-page]]]))
 
+;; TODO: This is all placeholder stuff.
+
 (defn recipe-page [recipe]
   (template
    (h/html
@@ -23,3 +25,10 @@
         [:ol
          (doall (map (fn [line]
                        [:li (:recipe_line/content line)])))]])))
+
+(defn home-page []
+  (template
+   (h/html
+       [:div
+        [:h1 "This is the home page!"]
+        [:p "It doesn't have a lot happening at the moment."]])))
