@@ -11,9 +11,8 @@
 (defn home-controller [req]
   (html-response (views/home-page)))
 
-(defn handler [db req]
+(defn creater-handler [db]
   (ring/ring-handler
    (ring/router
-    [["/" {:get home-controller}]])
-   {:data {:db db}}))
-
+    [["/" {:get home-controller}]]
+    {:data {:db db}})))

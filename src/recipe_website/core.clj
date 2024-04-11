@@ -14,7 +14,7 @@
   (jdbc/get-connection {:dbtype "sqlite" :dbname db-file}))
 
 (defmethod ig/init-key ::http-server [_ {:keys [port db]}]
-  (jetty/run-jetty (defaults/wrap-defaults #(controller/handler db %) defaults/site-defaults)
+  (jetty/run-jetty (defaults/wrap-defaults (controller/creater-handler db) defaults/site-defaults)
                    {:join? false
                     :port port}))
 
