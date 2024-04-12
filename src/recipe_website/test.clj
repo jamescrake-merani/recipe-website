@@ -15,11 +15,11 @@
                  {:name "Something Else" :quantity 323 :measurement "tests"}
                  {:name "Sanity" :quantity 1 :measurement "idk anymores"}]})
 
+(defn populate-database [db]
+  (model/create-tables db)
+  (model/insert-recipe test-recipe db ))
+
 (defn create-and-populate-database []
   (let [new-db (jdbc/get-connection {:dbtype "sqlite" :dbname ":memory:"})]
     (populate-database new-db)
     new-db))
-
-(defn populate-database [db]
-  (model/create-tables db)
-  (model/insert-recipe test-recipe db ))
