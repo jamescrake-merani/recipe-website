@@ -20,7 +20,7 @@
 (defn creater-handler [db]
   (ring/ring-handler
    (ring/router
-    [["/" {:get home-controller}]
-     ["/recipe/:id" {:get {:parameters {:path {:id int?}}
-                           :handler recipe-controller }}]]
+    [["/" {:handler home-controller}]
+     ["/recipe/:id" {:get {:parameters {:path {:id int?}}}
+                     :handler recipe-controller }]]
     {:data {:db db}})))
