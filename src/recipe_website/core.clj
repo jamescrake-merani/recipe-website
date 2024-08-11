@@ -2,7 +2,6 @@
   (:require [integrant.core :as ig]
             [next.jdbc :as jdbc]
             [ring.adapter.jetty :as jetty]
-
             [recipe-website.controller :as controller]))
 
 (def config
