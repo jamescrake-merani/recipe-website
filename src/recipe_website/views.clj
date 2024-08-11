@@ -24,7 +24,8 @@
         [:hr]
         [:ol
          (doall (map (fn [line]
-                       [:li (:recipe_line/content line)])))]])))
+                       [:li (:recipe_line/content line)])
+                     (:lines recipe)))]])))
 
 (defn home-page []
   (template
