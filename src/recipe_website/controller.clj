@@ -2,7 +2,8 @@
   (:require [reitit.ring :as ring]
             [recipe-website.views :as views]
             [ring.util.http-response :as response]
-            [recipe-website.model :as model]))
+            [recipe-website.model :as model]
+            [ring.middleware.defaults :as defaults]))
 
 (defn html-response [content]
   (-> (str content)
@@ -20,7 +21,5 @@
 (defn creater-handler [db]
   (ring/ring-handler
    (ring/router
-    [["/" {:handler home-controller}]
-     ["/recipe/:id" {:get {:parameters {:path {:id int?}}}
-                     :handler recipe-controller }]]
-    {:data {:db db}})))
+    [["/" {:get home-controller}]
+     ["/recipe/:id" {:get recipe-controller}]])))

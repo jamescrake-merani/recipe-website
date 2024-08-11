@@ -2,12 +2,12 @@
   (:require [integrant.core :as ig]
             [next.jdbc :as jdbc]
             [ring.adapter.jetty :as jetty]
-            [ring.middleware.defaults :as defaults]
+
             [recipe-website.controller :as controller]))
 
 (def config
-  {::http-server {:port 8080
-                  :handler {ig/ref ::app-handler}}
+  {::http-server {:port 5000
+                  :handler (ig/ref ::app-handler)}
    ::db-connection {:db-file "data.db"}
    ::app-handler {:db (ig/ref ::db-connection)}})
 
@@ -18,7 +18,7 @@
   (controller/creater-handler db))
 
 (defmethod ig/init-key ::http-server [_ {:keys [port handler]}]
-  (jetty/run-jetty (defaults/wrap-defaults handler defaults/site-defaults)
+  (jetty/run-jetty handler
                    {:join? false
                     :port port}))
 
