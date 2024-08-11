@@ -3,7 +3,10 @@
             [recipe-website.views :as views]
             [ring.util.http-response :as response]
             [recipe-website.model :as model]
-            [ring.middleware.defaults :as defaults]))
+            [ring.middleware.defaults :as defaults]
+            [reitit.coercion.schema]
+            [schema.core :as s]
+            [reitit.ring.coercion :as c]))
 
 (defn html-response [content]
   (-> (str content)
@@ -16,10 +19,29 @@
 (defn recipe-controller [req]
   (html-response
    (views/recipe-page
-    (model/get-recipe (:recipe-id (get-in req [:path-params :id]))))))
+    (model/get-recipe
+     (:db req)
+     (get-in req [:parameters :path :id])))))
+
+(def middleware-db
+  {:name ::db
+   :compile (fn [{:keys [db]} _]
+              (fn [handler]
+                (fn [req]
+                  (handler (assoc req :db db)))))})
 
 (defn creater-handler [db]
   (ring/ring-handler
    (ring/router
     [["/" {:get home-controller}]
-     ["/recipe/:id" {:get recipe-controller}]])))
+     ["/recipe/:id" {:get
+                     {:coercion reitit.coercion.schema/coercion
+                      :handler recipe-controller
+                      :parameters {:path {:id s/Int}}
+                      }}]]
+
+    {:data {:db db
+            :middleware [middleware-db
+                         c/coerce-exceptions-middleware
+                         c/coerce-request-middleware
+                         c/coerce-response-middleware]}})))
