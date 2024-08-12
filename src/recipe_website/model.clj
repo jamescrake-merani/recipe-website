@@ -46,7 +46,7 @@
             db
             (sql/format
              {:select :* :from :recipe-line :where [:= :recipe-id recipe-id]}))
-    :ingedients (jdbc/execute!
+    :ingredients (jdbc/execute!
                  db
                  (sql/format
                   {:select :* :from :ingredient :where [:= :recipe-id recipe-id]}))}
