@@ -21,7 +21,13 @@
    (h/html
        [:div
         [:h1 (:recipe/name recipe)]
+        [:h2 "Ingredients"]
+        [:ul
+         (doall (map (fn [ingredient]
+                       [:li (:ingredient/ingredient_name ingredient)])
+                     (:ingredients recipe)))]
         [:hr]
+        [:h2 "Steps"]
         [:ol
          (doall (map (fn [line]
                        [:li (:recipe_line/content line)])
