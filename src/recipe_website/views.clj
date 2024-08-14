@@ -21,6 +21,8 @@
    (h/html
        [:div
         [:h1 (:recipe/name recipe)]
+        ;; TODO: Format time guidance properly
+        [:i.fw-light "Takes ~" (str (:recipe/time_guidance recipe)) " minutes"]
         [:h2 "Ingredients"]
         [:ul
          (doall (map (fn [ingredient]
