@@ -26,7 +26,12 @@
         [:h2 "Ingredients"]
         [:ul
          (doall (map (fn [ingredient]
-                       [:li (:ingredient/ingredient_name ingredient)])
+                       [:li
+                        (str (:ingredient/quantity ingredient))
+                        " "
+                        (:ingredient/measurement ingredient)
+                        " of "
+                        (:ingredient/ingredient_name ingredient)])
                      (:ingredients recipe)))]
         [:hr]
         [:h2 "Steps"]
