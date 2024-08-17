@@ -10,7 +10,20 @@
                 :integrity "sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
                 :crossorigin "anonymous"}]]
        [:body
-        [:h1 "Test Template"]
+        [:nav.navbar.navbar-expand.bg-body-tertiary
+         [:div.container-fluid
+          [:a.navbar-brand {:href "/"} "Recipe Website"]
+          [:button.navbar-toggler {:type "button"
+                                   :data-bs-toggle "collapse"
+                                   :data-bs-target "navbarSupportedContent"
+                                   :aria-controls "navbarSupportedContent"
+                                   :aria-expanded "false"
+                                   :aria-label "Toggle navigation"}
+           [:span.navbar-toggler-icon]]
+          [:div#navbarSupportedContent.collapse.navbar-collapse
+           [:ul.navbar-nav.me-auto.mb-2.mb-lg-0
+            [:li.nav-item
+             [:a.nav-link {:href "#"} "Recipes"]]]]]]
         [:div.container
          current-page]]]))
 
