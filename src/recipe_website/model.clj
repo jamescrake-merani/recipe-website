@@ -41,19 +41,22 @@
                    [[:primary-key :recipe-id :ingredient-order]]]}))
 
 (defn get-recipe [db recipe-id]
-  (into
-   {:lines (jdbc/execute!
-            db
-            (sql/format
-             {:select :* :from :recipe-line :where [:= :recipe-id recipe-id]}))
-    :ingredients (jdbc/execute!
-                  db
-                  (sql/format
-                   {:select :* :from :ingredient :where [:= :recipe-id recipe-id]}))}
-   (jdbc/execute-one!
-    db
-    (sql/format
-     {:select :* :from :recipe :where [:= :id recipe-id]}))))
+  (jdbc/execute-one!
+   db
+   (sql/format
+    {:select :* :from :recipe :where [:= :id recipe-id]})))
+
+(defn get-recipe-lines [db recipe-id]
+  (jdbc/execute!
+   db
+   (sql/format
+    {:select :* :from :recipe-line :where [:= :recipe-id recipe-id]})))
+
+(defn get-recipe-ingredents [db recipe-id]
+  (jdbc/execute!
+   db
+   (sql/format
+    {:select :* :from :ingredient :where [:= :recipe-id recipe-id]})))
 
 (defn insert-recipe [recipe db]
   "RECIPE is represented as a map with the following keys
