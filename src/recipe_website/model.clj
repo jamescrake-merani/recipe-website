@@ -58,6 +58,11 @@
    (sql/format
     {:select :* :from :ingredient :where [:= :recipe-id recipe-id]})))
 
+(defn get-all-recipes [db]
+  (jdbc/execute!
+   db
+   (sql/format {:select :* :from :recipe})))
+
 (defn insert-recipe [recipe db]
   "RECIPE is represented as a map with the following keys
 :name
