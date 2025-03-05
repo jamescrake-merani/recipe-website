@@ -16,6 +16,10 @@
 (defn home-controller [req]
   (html-response (views/home-page)))
 
+(defn all-recipe-controller [req]
+  (html-response
+   (views/all-recipe-pages (model/get-all-recipes (:db req)))))
+
 (defn recipe-controller [req]
   (html-response
    (views/recipe-page
