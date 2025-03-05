@@ -18,7 +18,7 @@
 
 (defn all-recipe-controller [req]
   (html-response
-   (views/all-recipe-pages (model/get-all-recipes (:db req)))))
+   (views/all-recipe-page (model/get-all-recipes (:db req)))))
 
 (defn recipe-controller [req]
   (html-response
