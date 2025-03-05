@@ -53,6 +53,17 @@
                        [:li (:recipe_line/content line)])
                      (:lines recipe)))]])))
 
+(defn all-recipe-page [recipes]
+  (template
+   (h/html
+       [:div
+        [:h1 "All Recipes"]
+        [:ul
+         (doall
+          (map (fn [recipe]
+                 [:li (:name recipe)])
+               recipes))]])))
+
 (defn home-page []
   (template
    (h/html
