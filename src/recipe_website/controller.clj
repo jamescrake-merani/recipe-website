@@ -43,7 +43,7 @@
                       :handler recipe-controller
                       :parameters {:path {:id s/Int}}
                       }}]
-     ["/recipe/all" {:get all-recipe-controller}]]
+     ["/all-recipes" {:get all-recipe-controller}]]
 
     {:data {:db db
             :middleware [middleware-db
