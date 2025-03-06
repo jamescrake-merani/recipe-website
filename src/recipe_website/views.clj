@@ -23,7 +23,7 @@
           [:div#navbarSupportedContent.collapse.navbar-collapse
            [:ul.navbar-nav.me-auto.mb-2.mb-lg-0
             [:li.nav-item
-             [:a.nav-link {:href "#"} "Recipes"]]]]]]
+             [:a.nav-link {:href "/all-recipes"} "Recipes"]]]]]]
         [:div.container
          current-page]]]))
 
