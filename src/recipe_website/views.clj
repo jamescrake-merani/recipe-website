@@ -61,7 +61,7 @@
         [:ul
          (doall
           (map (fn [recipe]
-                 [:li (:recipe/name recipe)])
+                 [:li [:a {:href (str "/recipe/" (:recipe/id recipe) )} (:recipe/name recipe)]])
                recipes))]])))
 
 (defn home-page []
