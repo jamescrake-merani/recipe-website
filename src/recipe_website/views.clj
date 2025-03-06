@@ -29,7 +29,7 @@
 
 ;; TODO: This is all placeholder stuff.
 
-(defn recipe-page [recipe]
+(defn recipe-page [recipe ingredients lines]
   (template
    (h/html
        [:div
@@ -45,13 +45,13 @@
                         (:ingredient/measurement ingredient)
                         " of "
                         (:ingredient/ingredient_name ingredient)])
-                     (:ingredients recipe)))]
+                     ingredients))]
         [:hr]
         [:h2 "Steps"]
         [:ol
          (doall (map (fn [line]
                        [:li (:recipe_line/content line)])
-                     (:lines recipe)))]])))
+                     lines))]])))
 
 (defn all-recipe-page [recipes]
   (template

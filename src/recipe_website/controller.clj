@@ -21,11 +21,15 @@
    (views/all-recipe-page (model/get-all-recipes (:db req)))))
 
 (defn recipe-controller [req]
-  (html-response
+  (let [recipe-id (get-in req [:parameters :path :id])
+        recipe (model/get-recipe (:db req) recipe-id)
+        recipe-lines (model/get-recipe-lines (:db req) recipe-id)
+        recipe-ingredients (model/get-recipe-ingredents (:db req) recipe-id)]
+    (html-response
    (views/recipe-page
-    (model/get-recipe
-     (:db req)
-     (get-in req [:parameters :path :id])))))
+    recipe
+    recipe-ingredients
+    recipe-lines))))
 
 (def middleware-db
   {:name ::db
